@@ -13,7 +13,7 @@ Music streaming platforms contain millions of songs with different styles and ch
 In this project, the Spotify Songs dataset is explored, cleaned, visualized, and clustered using multiple machine learning algorithms. The resulting clusters can support music recommendation systems, playlist generation, and song similarity analysis.
 
 ---
---
+-
 ## Dataset
 
 The dataset contains information about Spotify songs along with several audio features extracted from each track.
