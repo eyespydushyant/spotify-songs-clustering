@@ -119,18 +119,7 @@ Some possible improvements include:
 - Genre-wise cluster analysis
 - Song recommendation engine based on cluster similarity
 
----
 
-## Repository Structure
-
-```
-Spotify-Songs-Clustering/
-│
-├── Spotify_Songs_Clustering.ipynb
-├── dataset.csv
-├── README.md
-└── images/
-```
 
 ---
 
