@@ -498,11 +498,31 @@ CLUSTER_NAMES_MAP = {
 # ─────────────────────────────────────────────
 @st.cache_data(show_spinner=False)
 def load_data():
-    df = pd.read_csv('dataset.csv')
+    # Only load the columns we actually need to save memory on Streamlit Cloud (1GB RAM limit)
+    usecols = [
+        'track_name', 'artists', 'track_genre', 'popularity', 'explicit',
+        'duration_ms', 'loudness', 'tempo'
+    ] + FEATURES_FOR_CLUSTER
+    
+    # Use efficient dtypes where possible
+    dtypes = {
+        'popularity': 'int16',
+        'explicit': 'bool',
+        'duration_ms': 'int32',
+    }
+    for f in FEATURES_FOR_CLUSTER + ['loudness', 'tempo']:
+        dtypes[f] = 'float32'
+        
+    df = pd.read_csv('dataset.csv', usecols=lambda c: c in usecols, dtype=dtypes)
     df.dropna(subset=['track_name', 'artists'], inplace=True)
-    df['duration_min'] = df['duration_ms'] / 60000
-    df['loudness_norm'] = (df['loudness'] - df['loudness'].min()) / (df['loudness'].max() - df['loudness'].min())
-    df['tempo_norm'] = (df['tempo'] - df['tempo'].min()) / (df['tempo'].max() - df['tempo'].min())
+    df['duration_min'] = (df['duration_ms'] / 60000).astype('float32')
+    
+    l_min, l_max = df['loudness'].min(), df['loudness'].max()
+    df['loudness_norm'] = ((df['loudness'] - l_min) / (l_max - l_min)).astype('float32')
+    
+    t_min, t_max = df['tempo'].min(), df['tempo'].max()
+    df['tempo_norm'] = ((df['tempo'] - t_min) / (t_max - t_min)).astype('float32')
+    
     return df
 
 @st.cache_data(show_spinner=False)
