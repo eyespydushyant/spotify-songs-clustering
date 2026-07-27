@@ -1222,7 +1222,7 @@ def get_img_base64(img_path):
         return base64.b64encode(data).decode()
     return ""
 
-ASSETS = r'c:\Users\dushy\Desktop\spotify clustering project anti\assets'
+ASSETS = os.path.join(os.path.dirname(__file__), 'assets')
 poster_files = {
     'synthwave': os.path.join(ASSETS, 'synthwave_poster_1785137523611.png'),
     'acoustic':  os.path.join(ASSETS, 'acoustic_poster_1785137539528.png'),
