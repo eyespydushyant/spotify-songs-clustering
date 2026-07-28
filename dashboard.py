@@ -496,7 +496,7 @@ CLUSTER_NAMES_MAP = {
 # ─────────────────────────────────────────────
 #  DATA LOADING & CACHING
 # ─────────────────────────────────────────────
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, max_entries=1)
 def load_data():
     # Only load the columns we actually need to save memory on Streamlit Cloud (1GB RAM limit)
     usecols = [
@@ -525,8 +525,8 @@ def load_data():
     
     return df
 
-@st.cache_data(show_spinner=False)
-def run_clustering(n_clusters: int, sample_size: int = 10000):
+@st.cache_data(show_spinner=False, max_entries=1)
+def run_clustering(n_clusters: int, sample_size: int = 2000):
     df = load_data()
     sample = df.sample(n=min(sample_size, len(df)), random_state=42).copy()
     scaler = StandardScaler()
@@ -546,8 +546,8 @@ def run_clustering(n_clusters: int, sample_size: int = 10000):
     variance = pca.explained_variance_ratio_
     return sample, sil, centers, variance
 
-@st.cache_data(show_spinner=False)
-def compute_elbow(max_k: int = 10, sample_size: int = 8000):
+@st.cache_data(show_spinner=False, max_entries=1)
+def compute_elbow(max_k: int = 10, sample_size: int = 2000):
     df = load_data()
     sample = df.sample(n=min(sample_size, len(df)), random_state=42)
     scaler = StandardScaler()
