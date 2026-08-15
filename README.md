@@ -1,6 +1,12 @@
 # 🎵 Spotify Songs Clustering Dashboard
 
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-Streamlit-1DB954?style=for-the-badge&logo=streamlit)](https://spotify-songs-clustering.streamlit.app/)
+
 An interactive ML-powered music analytics dashboard built with **Streamlit** and **Plotly**, featuring K-Means clustering on Spotify audio features.
+
+## 🌐 Live Demo
+
+> **👉 [https://spotify-songs-clustering.streamlit.app/](https://spotify-songs-clustering.streamlit.app/)**
 
 ![Spotify Clustering](https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=800&auto=format&fit=crop&q=80)
 
